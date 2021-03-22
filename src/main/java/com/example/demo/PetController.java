@@ -2,13 +2,24 @@ package com.example.demo;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Pet;
 import com.example.demo.service.PetService;
+
+import ch.qos.logback.core.net.SyslogOutputStream;
 
 @RestController
 public class PetController {
@@ -16,43 +27,49 @@ public class PetController {
 	@Autowired
 	private PetService service;
 	
-	@PostMapping("/addPet")
+	@PostMapping("/pets")
 	public Pet addPet(@RequestBody Pet pet) {
 		return service.savePet(pet);
 	}
-
-	@PostMapping("/addPets")
-	public List<Pet> addPets(@RequestBody List<Pet> pets) {
-		return service.savePets(pets);
-	}
 	
 	@GetMapping("/pets")
-	public List<Pet> findAllPets(){
-		return service.getPets();
+	public List<Pet> findAllPets(@RequestParam(value="id") Optional<Integer> id, @RequestParam(value="adopted") Optional<Boolean> adopted,@RequestParam(value="type") Optional<String> type){
+	
+		
+		
+		if(!id.isPresent() && !adopted.isPresent() && !type.isPresent())
+		    return service.getPets();
+		List<Pet> pets = new ArrayList<Pet>();
+		if(id.isPresent()) {
+			pets.add(service.getPetById(id));
+		}
+		else {
+		
+		 if(adopted.isPresent() && !type.isPresent()) {
+			 
+			return service.getPetsByAdopted(adopted);
+		}
+		
+	    if(type.isPresent() && !adopted.isPresent()) {
+			
+			return service.getPetsByType(type);
+			
+		}
+		if(type.isPresent() && adopted.isPresent()) {
+			return service.getPetsByTypeAndByAdopted(adopted, type);
+		}
+		}
+		return pets;
+		
 	}
 	
-	@GetMapping("/pet/{id}")
-	public Pet findPetById(@PathVariable int id){
-		return service.getPetById(id);
-	}
 	
-	@GetMapping("/petByStatus/{status}")
-	public List<Pet> findPetByAdopted(@PathVariable boolean status){
-		return service.getPetsByAdopted(status);
-	}
-	
-	@GetMapping("/petByType/{type}")
-	public List<Pet> findPetByType(@PathVariable String type){
-		return service.getPetsByType(type);
-	}
-	
-	
-	@PutMapping("/update")
+	@PutMapping("/pets")
 	public Pet updatePet(@RequestBody Pet pet) {
 		return service.updatePet(pet);
 	}
 	
-	@DeleteMapping("/delete/{id}")
+	@DeleteMapping("/pets/{id}")
 	public String deletePet(@PathVariable int id) {
 		return service.deletePet(id);
 	}

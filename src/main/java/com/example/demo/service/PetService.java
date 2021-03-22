@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,16 +27,16 @@ public class PetService{
 		return repository.findAll();
 	}
 	
-	public Pet getPetById(int id){
-		return repository.findById(id).orElse(null);
+	public Pet getPetById(Optional<Integer> id){
+		return repository.findById(id);
 	}
 	
-	public List<Pet> getPetsByAdopted(boolean adopted) {
+	public List<Pet> getPetsByAdopted(Optional<Boolean> adopted) {
 		return repository.findByAdopted(adopted);
 	}
 	
-	public List<Pet> getPetsByType(String type){
-		return repository.findByType(type);
+	public List<Pet> getPetsByType(Optional<String> t){
+		return repository.findByType(t);
 	}
 	
 	//delete
@@ -56,6 +57,11 @@ public class PetService{
 	    
 	    return repository.save(existingPet);
 	    
+	}
+
+	public List<Pet> getPetsByTypeAndByAdopted(Optional<Boolean> adopted, Optional<String> t) {
+		
+		return repository.findByAdoptedAndType(adopted, t);
 	}
 	
 	
