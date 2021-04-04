@@ -1,0 +1,12 @@
+.center {
+    margin: auto;
+    width: 40%;
+    border: 3px solid #ffffff;
+    padding: 10px;
+    background-color: rgb(220, 243, 245);
+  }
+
+  .notification{
+    background-color:transparent;
+    color:black;
+  }

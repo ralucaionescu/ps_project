@@ -1,0 +1,29 @@
+<div class="row">
+    <form #login="ngForm" (ngSubmit)="loginUser()">
+        <small class="text-danger">{{msg}}</small>
+        <div class="example-container form-group">
+
+            <mat-form-field appearance="fill">
+                <mat-label for="email"> Enter your email</mat-label>
+                <input matInput placeholder="pat@example.com" [formControl]="email" required name="email"
+                    [(ngModel)]="user.email">
+                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="example-container">
+            <mat-form-field appearance="fill">
+                <mat-label for="password">Enter your password</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" name="password" [(ngModel)]="user.password">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+
+        <button class="example-container" type="submit">
+            Log In
+        </button>
+    </form>
+</div>
