@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="cols" col=12>
+
+        <form #signup="ngForm" (ngSubmit)="signUpUser()">
+            <div class="container form-group">
+                <img
+                    src="assets\images\Remote-Work-Illustrations-by-Oblik-Studio\PNG\cat-video-games-controller-plant-by-oblik-studio.png" />
+                <mat-form-field hintLabel="Max 20 characters" appearance="fill">
+                    <mat-label for="firstName">Enter First Name</mat-label>
+                    <input matInput #input maxlength="20" name="firstName" [(ngModel)]="user.firstName">
+                    <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="c2">
+                <mat-form-field hintLabel="Max 20 characters" appearance="fill">
+                    <mat-label for="lastName">Enter Last Name</mat-label>
+                    <input matInput #input maxlength="20" name="lastName" [(ngModel)]="user.lastName">
+                    <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="example-container">
+                <mat-form-field appearance="fill">
+                    <mat-label for="email">Enter your email</mat-label>
+                    <input matInput placeholder="pat@example.com" [formControl]="email" name="email" required
+                        [(ngModel)]="user.email">
+                    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="example-container">
+                <mat-form-field appearance="fill">
+                    <mat-label for="password">Enter your password</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" name="password" [(ngModel)]="user.password">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+            <div class="example-container">
+                <button type="submit">
+                    Sign Up
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

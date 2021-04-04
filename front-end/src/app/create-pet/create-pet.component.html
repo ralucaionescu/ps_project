@@ -1,0 +1,20 @@
+<form #userPost="ngForm" (ngSubmit)="onSubmit(userPost.value)">
+    <div class="tile center mt-6">
+        <div class="tile is-parent">
+            <article class="tile is-child notification is-success is-vertical">
+                <div class="content">
+                    <p class="title">Add a new pet</p>
+
+                    <input class="form-control" type="text" name="name" ngModel placeholder="Name"><br>
+                    <input class="form-control" type="text" name="type" ngModel placeholder="Type"><br>
+                    <input class="form-control" type="text" name="breed" ngModel placeholder="Breed"><br>
+                    <input class="form-control" type="text" name="age" ngModel placeholder="Age"><br>
+                    <input class="form-control" type="text" name="vaccinated" ngModel placeholder="Vaccinated? Y/N"><br>
+                    <input class="form-control" type="text" name="image" ngModel placeholder="Image"><br>
+
+                    <button type="submit" class="btn btn-primary mb-2">Add</button>
+                </div>
+            </article>
+        </div>
+    </div>
+</form>

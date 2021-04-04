@@ -1,0 +1,43 @@
+.mat-form-field + .mat-form-field {
+    
+    
+}
+
+img{
+    border-radius: 4px;
+    padding: 5px;
+    width: 300px;
+    margin-right: 40px;
+}
+
+.container {
+  
+  
+  margin-left: 20%;
+  padding-top: 0%;
+}
+
+.c2 , .example-container{
+  margin-left: 40%;
+  margin-top: 20px;
+
+}
+
+.example-container .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+.example-right-align {
+  text-align: right;
+}
+
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.example-right-align {
+  -moz-appearance: textfield;
+}
+
+
