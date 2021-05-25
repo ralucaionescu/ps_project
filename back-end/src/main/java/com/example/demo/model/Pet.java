@@ -1,13 +1,19 @@
 package com.example.demo.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 @Entity
 @Table(name = "PET")
-
 public class Pet {
 	@Id
 	@GeneratedValue
@@ -19,23 +25,59 @@ public class Pet {
 	private String breed;
 	private boolean adopted;
 	private String image;
+	private boolean inShelter;
+	
+	
+	@JsonBackReference(value="center-pet")
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "center")
+	private Center center;
+	
+	
+	@JsonBackReference(value="owner-pet")
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "user")
+	private User owner;
+//	
 
-	public String getImage() {
-		return image;
+public Pet() {
+		
 	}
-	public void setImage(String image) {
-		this.image = image;
-	}
-	public Pet(String type, String name, int age, boolean vaccinated, String breed, boolean adopted) {
+	
+	public Pet(String type,String name, int age, boolean vaccinated,String breed, boolean adopted, boolean inShelter, Center center) {
 		this.type = type;
 		this.name = name;
 		this.age = age;
 		this.vaccinated = vaccinated;
 		this.breed = breed;
 		this.adopted = adopted;
+		this.inShelter = inShelter;
+		this.center = center;
 	}
-	public Pet() {
-		
+	
+	
+	public boolean isInShelter() {
+		return inShelter;
+	}
+	public void setInShelter(boolean inShelter) {
+		this.inShelter = inShelter;
+	}
+	
+	
+	
+	public Center getCenter() {
+		return this.center;
+	}
+	
+	public void setCenter(Center center) {
+		this.center = center;
+	}
+	
+	public User getOwner() {
+		return owner;
+	}
+	public void setOwner(User u) {
+		this.owner = u;
 	}
 	public int getId() {
 		return id;
@@ -75,5 +117,11 @@ public class Pet {
 	}
 	public void setType(String type) {
 		this.type = type;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
 	}
 }

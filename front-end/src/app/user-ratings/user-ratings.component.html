@@ -1,0 +1,19 @@
+
+<div class="card" *ngIf="loggedIn.value && ratings.length!=0">
+  <h2 class="card-header"> Your ratings: </h2>
+  <div class="card-body">
+  <div *ngFor = "let rate of ratings" >
+  <div *ngIf="rate.user.id === user.id"> 
+  <h3> {{rate.center.name}} - rate : {{rate.rate}}</h3>
+</div>
+  </div>
+  </div>
+</div>
+
+<div *ngIf="ratings.length===0" class="card">
+  <h1 class="card-header"> You haven't rated any adoption Centers! </h1>
+  <div class="card-body">
+    <h2> Please visit the adoption centers page </h2>
+  </div>
+</div>
+

@@ -1,0 +1,315 @@
+body{
+    position: relative;
+}
+
+a,
+a:hover,
+a:focus {
+    color: inherit;
+}
+ngb-rating {
+  color: #034e1be8;
+  font-size: 40px;
+}
+.all-text.search{
+  position: relative;
+  right: 5%;
+}
+.rating{
+  display: inline;
+}
+.title{
+    position: absolute;
+    top:70%;
+    left:10%;
+    font-size: 4vw;
+    color:rgb(255, 255, 255);
+    font-family: 'Lobster', cursive;
+}
+
+.form-group{
+  display:inline-block;
+ 
+}
+
+
+.header-text{
+  position: absolute;
+  top:40%;
+  left:10%;
+  font-size: 4vw;
+  color:rgb(255, 255, 255);
+  font-family: 'Lobster', cursive;
+}
+
+.subtitle{
+  position: absolute;
+  top:50%;
+  left:10%;
+  font-size: 2vw;
+  color:rgb(255, 255, 255);
+  font-family: 'Heboo', cursive;
+}
+
+.hero{
+
+background-image: url('src/assets/images/mituok.jpg') ;
+background-size: cover;
+background-position: 10%;
+
+}
+.btn-secondary {
+  color: #303235;
+  font-family: proxima-nova,sans-serif;
+  -webkit-border-radius: 2rem;
+  border-radius: 2rem;
+  font-weight: 800;
+  background-color: #b1cbbb;
+  border: none;
+}
+.btn_cta_link {
+  margin-right: 1rem;
+  font-family: proxima-nova,sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  padding: 1rem 3rem;
+  border: #fff solid .125rem;
+}
+.text{
+  
+    font-size: 3rem;
+    color:rgb(255, 255, 255);
+    font-family: 'Lobster', cursive;
+}
+
+.card-title{
+  font-family: 'Heboo', cursive;
+}
+
+.content-update{
+    background-color: #b1cbbb;
+}
+
+.content{
+   
+    background-color: #b1cbbb;
+}
+
+.is-child{
+    
+    background-color: #b1cbbb;
+}
+
+
+.notification.is-primary{
+
+
+height:20%;
+width: 110%;
+margin-left: 0%;
+background-color:#b1cbbb;
+display: flex;
+justify-content: center;
+align-items: center;
+overflow:hidden;
+
+}
+.center {
+  margin: auto;
+  width: 40%;
+  border: 3px solid #ffffff;
+  padding: 10px;
+  background-color: rgb(180, 188, 196);
+}
+
+.notification{
+  background-color:transparent;
+  color:black;
+}
+
+.text-card {
+  font-size: large;
+  font-family: 'Heebo', cursive;
+}
+.text-title{
+  font-size: 3rem;
+  font-family: 'Heebo', cursive;
+}
+
+input.ng-invalid.ng-touched{
+  border: 1px solid red;
+}
+
+.card{
+  width: 70%;
+  left:15%;
+  margin-top:20px;
+}
+
+body {
+    background-color: #F1F2F3;
+}
+.page-section{
+    padding: 6rem 0;
+}
+.container-fluid,
+.container {
+    max-width: 100%;
+  
+}
+
+.card-container {
+    padding: 10px 0px;
+    -webkit-perspective: 100;
+    perspective: 1400;
+}
+
+.profile-card-4 {
+    max-width: 300px;
+    background-color: #b1cbbb;
+    border-radius: 5px;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+    margin: 10px auto;
+    cursor: pointer;
+}
+.profile-card-4 .profile-overview {
+        border: 1px solid #b1cbbb;
+        box-shadow: 0px 0px 999px 999px rgba(78, 76, 76, 0.5);
+        z-index: 500;
+        
+      }
+
+
+.profile-card-4 img {
+    transition: all 0.25s linear;
+  
+}
+
+.profile-card-4 .profile-content {
+    position: relative;
+    padding: 15px;
+    background-color:#deeaee;
+}
+
+.profile-card-4 .profile-name {
+    font-weight: bold;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: -75px;
+    color: rgb(160, 132, 132);
+    font-size: 17px;
+}
+
+.profile-card-4 .profile-name p {
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+}
+
+.profile-card-4 .profile-description {
+    color: #777;
+    font-size: 12px;
+    padding: 10px;
+}
+
+.profile-card-4 .profile-overview {
+    padding: 15px 0px;
+}
+
+.profile-card-4 .profile-overview p {
+    font-size: 10px;
+    font-weight: 600;
+    color: #777;
+}
+
+.profile-card-4 .profile-overview h4 {
+    color: #273751;
+    font-weight: bold;
+}
+
+.profile-card-4 .profile-content::before {
+    content: "";
+    position: absolute;
+    height: 20px;
+    top: -10px;
+    left: 0px;
+    right: 0px;
+    background-color: rgb(248, 248, 248);
+    z-index: 0;
+    transform: skewY(3deg);
+}
+
+.profile-card-4:hover img {
+    transform: rotate(5deg) scale(1.1, 1.1);
+    filter: brightness(110%);
+}
+
+  
+  .example-margin {
+    margin: 0 12px;
+  }
+  
+  ul {
+    list-style-type: none;
+    margin-top: 4px;
+  }
+
+  .section-header h3 {
+    font-size: 36px;
+    color: #413e66;
+    text-align: center;
+    font-weight: 700;
+    position: relative;
+    font-family: "Montserrat", sans-serif;
+  }
+  .section-header p {
+    text-align: center;
+    margin: auto;
+    font-size: 15px;
+    padding-bottom: 60px;
+    color: #535074;
+    width: 50%;
+  }
+  @media (max-width: 767px) {
+    .section-header p {
+      width: 100%;
+    }
+  }
+  #hero {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    background: #f5f8fd url('https://petsmartcharities.org/sites/default/files/2019-03/Adoption%20Center-d.L2%20hero.jpg') center top no-repeat;
+    background-size: cover;
+    
+  }
+  @media (max-width: 767px) {
+    #hero {
+      height: auto;
+      padding: 100px 0 60px 0;
+    }
+    #hero .container {
+      height: auto !important;
+    }
+    #hero .intro-img {
+      width: 80%;
+    }
+  }
+  @media (min-width: 992px) {
+    #hero .intro-info {
+      padding-top: 80px;
+    }
+  }
+  @media (max-width: 767px) {
+    #hero .intro-info {
+      text-align: center;
+      padding-top: 40px;
+    }
+  }
+  
+  section {
+    overflow: hidden;
+  }

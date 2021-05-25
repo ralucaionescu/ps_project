@@ -1,0 +1,32 @@
+
+<div class="container " >
+        <div class="cols col=12">
+            <div class="row">
+                <div class="col-md-6 col-lg-4 mb-6 mb-lg-0" *ngFor="let pet of currentCenterPets">
+                    <div class="profile-card-4 text-center">
+
+                        <img src="{{pet.image}}" class="img img-responsive" />
+
+                        <div class="profile-content">
+                            <div class="card-body card-title">
+                                <h4 class=" card-title">This is {{pet.name}}</h4>
+                               
+                             <div *ngFor="let adopt of adoptedPets">
+                              <div *ngIf="pet.id===adopt.id">
+                                It was adopted by you!
+                               </div>
+                               </div>
+                                <p class="card-text"  >{{pet.adopted ? 'It was adopted' : 'Is waiting for you to adopt
+                                    it!'}}
+                                </p>
+                             
+                                <button mat-button *ngIf="loggedIn.value && user.role==='user' && pet.adopted===false"  (click) ="adoptPet(pet)">Adopt now</button>
+                            </div>
+                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+

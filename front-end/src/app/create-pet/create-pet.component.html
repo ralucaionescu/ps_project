@@ -3,16 +3,45 @@
         <div class="tile is-parent">
             <article class="tile is-child notification is-success is-vertical">
                 <div class="content">
-                    <p class="title">Add a new pet</p>
+                    <p class="text-title">Add a new pet</p>
+                    <label class="text" for="name">Pet's name</label>
+                    <input class="form-control" id="name" type="text" autocomplete="off" name="name" ngModel
+                        placeholder="Name" ><br>
+                    <label class="text" for="type">Pet's type</label>
+                    <select class="form-control" type="text" id="type" name="type" ngModel placeholder="Type" >
+                        <option value="" disabled selected>Select a type</option>
+                        <option value="cat">cat</option>
+                        <option value="dog">dog</option>
+                    </select>
+                    <br>
+                    <label class="text" for="breed">Pet's breed</label>
+                    <input class="form-control" type="text" id="breed" name="breed" ngModel placeholder="Breed" ><br>
+                    <label class="text" for="age">Pet's age</label>
+                    <input class="form-control" type="number" id="age" name="age" ngModel placeholder="Age"><br>
+                    <p class="text">Is the pet vaccinated?</p>
 
-                    <input class="form-control" type="text" name="name" ngModel placeholder="Name"><br>
-                    <input class="form-control" type="text" name="type" ngModel placeholder="Type"><br>
-                    <input class="form-control" type="text" name="breed" ngModel placeholder="Breed"><br>
-                    <input class="form-control" type="text" name="age" ngModel placeholder="Age"><br>
-                    <input class="form-control" type="text" name="vaccinated" ngModel placeholder="Vaccinated? Y/N"><br>
-                    <input class="form-control" type="text" name="image" ngModel placeholder="Image"><br>
+                    <label class="text" for="yes">YES</label>
+                    <input type="radio" id="yes" value="true" name="vaccinated" [(ngModel)]="userPost.vaccinated"><br>
 
-                    <button type="submit" class="btn btn-primary mb-2">Add</button>
+                    <label class="text" for="no">NO</label>
+                    <input type="radio" id="no" value="false" name="vaccinated" [(ngModel)]="userPost.vaccinated"><br>
+                    <br>
+                   
+                    <label class="text" for="center">Pet's Adoption Center</label>
+                    <select class="form-control" type="text" id="center" name="center" ngModel placeholder="Select a shelter">
+                        <option value="" disabled selected>Select a shelter</option>
+                        
+                        <option   *ngFor="let c of centersList" [ngValue]="c">{{c.name}}</option>
+                       
+                    </select>
+                  
+                    <br>
+
+                    <label class="text" for="image">Pet's photo</label>
+                    <input class="form-control" type="text" id="image" name="image" ngModel placeholder="Image"><br>
+
+
+                    <button type="submit" class="btn btn-primary mb-2" [disabled]="!userPost.valid">Add</button>
                 </div>
             </article>
         </div>

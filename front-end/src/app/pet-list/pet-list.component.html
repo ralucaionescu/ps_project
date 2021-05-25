@@ -1,120 +1,142 @@
-<section class="hero is-medium is-link">
-    <div class="hero-body">
-        <p class="title ml-6">
-            Want to adopt?
-        </p>
-        <p class="subtitle ml-6">
-            Find your soul pet!</p>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@1000&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Heebo&display=swap" rel="stylesheet">
 
+<section id="hero" class="clearfix">
+    <div class="container d-flex h-100">
+        <div class="row justify-content-center align-self-center" data-aos="fade-up">
+            <div class="col-md-6 intro-info order-md-first order-last" data-aos="zoom-in" data-aos-delay="100">
+
+                <div class="col-md-6 intro-img order-md-last order-first" data-aos="zoom-out" data-aos-delay="200">
+                    <img src="src/assets/images/mituok.jpg" alt="" class="img-fluid">
+                </div>
+            </div>
+        </div>
     </div>
-
 </section>
 
-<div class="container is-max-desktop mt-1 mb-0">
-    <div class="notification is-primary banner">
-        <h1>Have a preference?</h1>
-        <section class="example-section">
-            <mat-checkbox class="example-margin" (click)="getByType('cat')">Cats</mat-checkbox>
-            <mat-checkbox class="example-margin" (click)="getByType('dog')">Dogs</mat-checkbox>
-            <mat-checkbox class=" example-margin" (click)="getByType('both')">Both</mat-checkbox>
-        </section>
+
+<h1 class="title">
+    <a href="/pets#adopt" style="text-decoration: none"> Find your best friend here! </a>
+
+</h1>
+
+<div id="adopt">
+
+    <div class="container is-fluid">
+        <div class="notification is-primary ">
+            <h1 class="text">Have a preference?</h1>
+            <section class="example-section ">
+
+                <mat-radio-button class="example-radio-button" (click)="getByType('cat')">Cats</mat-radio-button>
+                <mat-radio-button class="example-radio-button" (click)="getByType('dog')">Dogs</mat-radio-button>
+                <mat-radio-button class="example-radio-button" (click)="getByType('both')">Both</mat-radio-button>
+                
+
+            </section>
+
+        </div>
 
     </div>
 
-</div>
+    <div class="container " *ngIf=!currentPet>
+        <div class="cols col=12">
+            <div class="row" *ngIf="asyncPets$ | async as pets">
+                <div class="col-md-6 col-lg-4 mb-6 mb-lg-0" *ngFor="let pet of pets">
+                    <div class="profile-card-4 text-center">
 
-<div class="container " *ngIf=!currentPet>
-    <div class="cols col=12">
-        <div class="row">
-            <div class="col-md-6 col-lg-4 mb-6 mb-lg-0" *ngFor="let pet of pets">
-                <div class="profile-card-4 text-center" (click)="selectPet(pet)">
+                        <img src="{{pet.image}}" class="img img-responsive" />
 
-                    <img src="{{pet.image}}" class="img img-responsive" />
+                        <div class="profile-content">
+                            <div class="card-body card-title">
+                                <h1 class=" card-title">This is {{pet.name}}</h1>
+                                <h3 class="card-text">A cute <strong> {{pet.breed}} {{pet.type}} </strong> </h3>
+                             <div *ngFor="let adopt of adoptedPets">
+                              <div *ngIf="pet.id===adopt.id">
+                                It was adopted by you!
+                               </div>
+                               </div>
+                                <p class="card-text"  >{{pet.adopted ? 'It was adopted' : 'Is waiting for a home!'}}
+                                </p>
 
-                    <div class="profile-content">
-                        <div class="card-body">
-                            <h4 class=" card-title">This is {{pet.name}}</h4>
-                            <p class="card-text">Age: {{pet.age}}</p>
-                            <p class="card-text">Breed: {{pet.breed}}</p>
-                            <p class="card-text">{{pet.adopted ? 'It was adopted' : 'Is waiting for you to adopt
-                                it!'}}
-                            </p>
-                            <a type="button" (click)="selectPet(pet)">Update</a>
+                             
+                                <button mat-button *ngIf="loggedIn.value && user.role==='admin'"
+                                    (click)="selectPet(pet)" [currentPet]="pet" >Update</button>
+                                <button mat-button *ngIf="loggedIn.value && user.role==='user' && pet.adopted===false"  (click) ="adoptPet(pet)">Adopt now</button>
+                            </div>
+                            <button class=" button is-danger is-outlined" *ngIf="loggedIn.value && user.role==='admin'"
+                                (click)="deletePet(pet.id)">Delete</button>
+
                         </div>
-                        <button class="button is-danger is-outlined" (click)="deletePet(pet.id)">
-                            <span>Delete</span>
-                            <span class="icon is-small">
-                                <i class="fas fa-times"></i>
-                            </span>
-                        </button>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<div *ngIf=currentPet>
-    <div class="cols col=8">
-        <div class="row">
-            <div class="col-12 col-lg-6">
-                <div class="profile-card-4 text-center">
+    <div *ngIf=currentPet>
+   <div class="cols col=8">
+            <div class="row">
+                <div class="col-12 col-lg-6">
+                    <div class="profile-card-4 text-center">
 
-                    <img src="{{currentPet.image}}" class="img img-responsive" />
+                        <img src="{{currentPet.image}}" class="img img-responsive" />
 
-                    <div class="profile-content">
-                        <div class="card-body">
-                            <h4 class=" card-title">This is {{currentPet.name}}</h4>
-                            <p class="card-text">Age: {{currentPet.age}}</p>
-                            <p class="card-text">Breed: {{currentPet.breed}}</p>
-                            <p class="card-text">{{currentPet.adopted ? 'It was adopted' : 'Is waiting for you to adopt
-                                it!'}}
-                            </p>
+                        <div class="profile-content">
+                            <div class="card-body">
+                                <h4 class=" card-title">This is {{currentPet.name}}</h4>
+                                <p class="card-text">Age: {{currentPet.age}}</p>
+                                <p class="card-text">Breed: {{currentPet.breed}}</p>
+                                <p class="card-text">{{currentPet.adopted ? 'It was adopted' : 'Is waiting for you to
+                                    adopt
+                                    it!'}}
+                                </p>
+
+                            </div>
 
                         </div>
-
                     </div>
                 </div>
-            </div>
-            <div class="col-12 col-lg-6">
-                <form novalidate>
-                    <div class="tile center">
-                        <div class="tile is-parent">
-                            <article class="tile is-child notification is-success is-vertical">
-                                <div class="content">
-                                    <p class="title">Update pet with id {{currentPet.id}}</p>
+                <div class="col-12 col-lg-6 content-update">
+                    <form novalidate>
+                        <div class="tile center">
+                            <div class="tile is-parent">
+                                <article class="tile is-child notification is-success is-vertical">
+                                    <div class="content">
+                                        <input class="form-control" type="text" name="name"
+                                            [(ngModel)]="currentPet.name"><br>
+                                        <input class="form-control" type="text" name="type"
+                                            [(ngModel)]="currentPet.type"><br>
+                                        <input class="form-control" type="text" name="breed"
+                                            [(ngModel)]="currentPet.breed"><br>
+                                        <input class="form-control" type="text" name="age"
+                                            [(ngModel)]="currentPet.age"><br>
+                                        <input class="form-control" type="text" name="vaccinated"
+                                            [(ngModel)]="currentPet.vaccinated"><br>
+                                        <input class="form-control" type="text" name="adopted"
+                                            [(ngModel)]="currentPet.adopted"><br>
+                                        <input class="form-control" type="text" name="image"
+                                            [(ngModel)]="currentPet.image"><br>
 
-                                    <input class="form-control" type="text" name="name"
-                                        [(ngModel)]="currentPet.name"><br>
-                                    <input class="form-control" type="text" name="type"
-                                        [(ngModel)]="currentPet.type"><br>
-                                    <input class="form-control" type="text" name="breed"
-                                        [(ngModel)]="currentPet.breed"><br>
-                                    <input class="form-control" type="text" name="age" [(ngModel)]="currentPet.age"><br>
-                                    <input class="form-control" type="text" name="vaccinated"
-                                        [(ngModel)]="currentPet.vaccinated"><br>
-                                    <input class="form-control" type="text" name="adopted"
-                                        [(ngModel)]="currentPet.adopted"><br>
-                                    <input class="form-control" type="text" name="image"
-                                        [(ngModel)]="currentPet.image"><br>
-
-                                    <a type="submit" (click)=updatePet(currentPet)>
-                                        <div class="field is-grouped">
-                                            <p class="control">
-                                                <button class="button is-link">
-                                                    Save changes
-                                                </button>
-                                            </p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </article>
+                                        <a type="submit" (click)=updatePet(currentPet)>
+                                            <div class="field is-grouped">
+                                                <p class="control">
+                                                    <button class="button is-link">
+                                                        Save changes
+                                                    </button>
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </article>
+                            </div>
                         </div>
-                    </div>
-                </form>
-            </div>
+                    </form>
+                </div>
 
+            </div>
         </div>
+    
     </div>
+       
 </div>

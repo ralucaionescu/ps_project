@@ -1,29 +1,41 @@
-<div class="row">
-    <form #login="ngForm" (ngSubmit)="loginUser()">
-        <small class="text-danger">{{msg}}</small>
-        <div class="example-container form-group">
+<div class="container sign-in-mode">
+    <div class="forms-container">
+        <div class="signin-signup">
+            <form #login="ngForm" (ngSubmit)="loginUser()" class=" sign-in-form">
+            <div *ngIf="msg!='success'"class="alert alert-danger alert-dismissible fade show">
+              <strong>Error!Please enter a correct username and password</strong> 
+       
+                 </div>
+                <h2 class="title">Sign in</h2>
+                <div class="input-field">
+                    <i class="fas fa-user"></i>
+                    <input type="text" name="Email" [(ngModel)]="user.email" placeholder="Email" required email #email="ngModel"/>
+                </div>
+                <div class="input-field">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" name="password" [(ngModel)]="user.password" required placeholder="Password" />
+                </div>
+                <input type="submit" value="Login" required class="btn solid" />
 
-            <mat-form-field appearance="fill">
-                <mat-label for="email"> Enter your email</mat-label>
-                <input matInput placeholder="pat@example.com" [formControl]="email" required name="email"
-                    [(ngModel)]="user.email">
-                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
+            </form>
+
         </div>
+    </div>
 
-        <div class="example-container">
-            <mat-form-field appearance="fill">
-                <mat-label for="password">Enter your password</mat-label>
-                <input matInput [type]="hide ? 'password' : 'text'" name="password" [(ngModel)]="user.password">
-                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                    [attr.aria-pressed]="hide">
-                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    <div class="panels-container">
+        <div class="panel left-panel">
+            <div class="content">
+                <h3>New here ?</h3>
+                <p>
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
+                    ex ratione. Aliquid!
+                </p>
+                <button class="btn transparent" id="sign-up-btn" (click)="register()">
+                    Sign up
                 </button>
-            </mat-form-field>
+            </div>
+            <img src=" assets/images/log.svg" class="image" alt="" />
         </div>
 
-        <button class="example-container" type="submit">
-            Log In
-        </button>
-    </form>
+    </div>
 </div>

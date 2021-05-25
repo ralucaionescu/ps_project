@@ -1,0 +1,25 @@
+.center {
+    margin: auto;
+    width: 40%;
+    border: 3px solid #ffffff;
+    padding: 10px;
+    background-color: rgb(180, 188, 196);
+  }
+
+  .notification{
+    background-color:transparent;
+    color:black;
+  }
+
+  .text{
+    font-size: large;
+    font-family: 'Heebo', cursive;
+  }
+  .text-title{
+    font-size: 3rem;
+    font-family: 'Heebo', cursive;
+  }
+
+  input.ng-invalid.ng-touched{
+    border: 1px solid red;
+  }

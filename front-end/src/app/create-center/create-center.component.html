@@ -1,0 +1,22 @@
+<form #userPost="ngForm" (ngSubmit)="onSubmit(userPost.value)">
+    <div class="tile center mt-6">
+        <div class="tile is-parent">
+            <article class="tile is-child notification is-success is-vertical">
+                <div class="content">
+                    <p class="text-title">Add a new adoption Center</p>
+                    <label class="text" for="name">Center name</label>
+                    <input class="form-control" id="name" type="text" autocomplete="off" name="name" ngModel
+                        placeholder="Name" required><br>
+                    <label class="text" for="city">City</label>
+                    <input class="form-control" id="city" type="text" autocomplete="off" name="city" ngModel
+                        placeholder="City" required><br>
+                    <label class="text" for="description">Description</label>
+                    <textarea class="form-control" id="description" type="text" autocomplete="off" name="description" ngModel
+                        placeholder="Description" rows="8" required> </textarea><br>    
+
+                    <button type="submit" [disabled]="!userPost.valid"class="btn btn-primary mb-2">Add</button>
+                </div>
+            </article>
+        </div>
+    </div>
+</form>
