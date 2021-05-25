@@ -1,8 +1,5 @@
-
-
-a {
-    font-family: "Open Sans";
-    margin: 0px;
+body{
+    position: absolute;
 }
 
 a,
@@ -11,11 +8,68 @@ a:focus {
     color: inherit;
 }
 
+.title{
+    position: absolute;
+    top:30%;
+    left:50%;
+  
+    transform: translate(-50%, -20%);
+    font-size: 4vw;
+    color:rgb(255, 255, 255);
+    font-family: 'Lobster', cursive;
+    
+}
+
+
+
 .hero{
-background-image: url('src/assets/images/dog3.jpg') ;
+
+background-image: url('src/assets/images/mituok.jpg') ;
 background-size: cover;
+background-position: 10%;
 
 }
+
+.text{
+   
+    font-size: 3rem;
+    color:rgb(255, 255, 255);
+    font-family: 'Lobster', cursive;
+}
+
+.card-title{
+  font-family: 'Heboo', cursive;
+}
+
+.content-update{
+    background-color: #b1cbbb;
+}
+
+.content{
+   
+    background-color: #b1cbbb;
+}
+
+.is-child{
+    
+    background-color: #b1cbbb;
+}
+
+.notification.is-primary{
+
+
+height:20%;
+width: 110%;
+margin-left: 0;
+background-color:#b1cbbb;
+display: flex;
+justify-content: center;
+align-items: center;
+overflow:hidden;
+
+}
+
+
 body {
     background-color: #F1F2F3;
 }
@@ -24,7 +78,10 @@ body {
 }
 .container-fluid,
 .container {
-    max-width: 70%;
+  display: flex;
+  align-items:baseline;
+  justify-content: center;
+    max-width: 100%;
 }
 
 .card-container {
@@ -35,7 +92,7 @@ body {
 
 .profile-card-4 {
     max-width: 300px;
-    background-color: rgb(240, 176, 176);
+    background-color: #b1cbbb;
     border-radius: 5px;
     box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
     overflow: hidden;
@@ -44,7 +101,7 @@ body {
     cursor: pointer;
 }
 .profile-card-4 .profile-overview {
-        border: 1px solid #f56767;
+        border: 1px solid #b1cbbb;
         box-shadow: 0px 0px 999px 999px rgba(78, 76, 76, 0.5);
         z-index: 500;
         
@@ -53,12 +110,13 @@ body {
 
 .profile-card-4 img {
     transition: all 0.25s linear;
+  
 }
 
 .profile-card-4 .profile-content {
     position: relative;
     padding: 15px;
-    background-color: rgb(186, 241, 248);
+    background-color:#deeaee;
 }
 
 .profile-card-4 .profile-name {
@@ -115,10 +173,6 @@ body {
     filter: brightness(110%);
 }
 
-.example-section {
-    margin: 10px 0;
-    width: 80%;
-  }
   
   .example-margin {
     margin: 0 12px;
@@ -129,16 +183,59 @@ body {
     margin-top: 4px;
   }
 
-
-  .center {
-      background-color:transparent;
-      margin: auto;
-  
-    width:  70%;
-    border: 3px solid #ffffff;
-    padding: 10px;
-    background-color: rgb(220, 243, 245);
+  .section-header h3 {
+    font-size: 36px;
+    color: #413e66;
+    text-align: center;
+    font-weight: 700;
+    position: relative;
+    font-family: "Montserrat", sans-serif;
   }
-  .banner{
-    opacity: 0.7;
+  .section-header p {
+    text-align: center;
+    margin: auto;
+    font-size: 15px;
+    padding-bottom: 60px;
+    color: #535074;
+    width: 50%;
+  }
+  @media (max-width: 767px) {
+    .section-header p {
+      width: 100%;
+    }
+  }
+  #hero {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    background: #f5f8fd url('src/assets/images/mituok3.jpg') center top no-repeat;
+    background-size: cover;
+    
+  }
+  @media (max-width: 767px) {
+    #hero {
+      height: auto;
+      padding: 100px 0 60px 0;
+    }
+    #hero .container {
+      height: auto !important;
+    }
+    #hero .intro-img {
+      width: 80%;
+    }
+  }
+  @media (min-width: 992px) {
+    #hero .intro-info {
+      padding-top: 80px;
+    }
+  }
+  @media (max-width: 767px) {
+    #hero .intro-info {
+      text-align: center;
+      padding-top: 40px;
+    }
+  }
+  
+  section {
+    overflow: hidden;
   }

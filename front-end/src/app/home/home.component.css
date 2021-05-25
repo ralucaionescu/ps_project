@@ -1,0 +1,89 @@
+.landing{
+    
+    position: fixed;
+    top: 0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background: url('src/assets/images/adoopt.jpeg'); 
+    background-size:contain;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    background-size: cover;
+    padding: 0rem 0rem;
+}
+
+.big-text{
+    position: absolute;
+    top:20%;
+    left:50%;
+    transform: translate(-50%, -30%);
+    font-size: 5vw;
+    color:rgb(255, 255, 255);
+    font-family: 'Lobster', cursive;
+}
+.big-text2{
+    position: absolute;
+    top:30%;
+    left:50%;
+    transform: translate(-50%, -30%);
+    font-size: 5vw;
+    color:rgb(77, 41, 0);
+    font-family: 'Lobster', cursive;
+}
+
+.intro{
+    background: url('src/assets/images/mimi2.jpg'); 
+    background-size:contain;
+    background-position:center;
+    background-repeat:no-repeat;
+    position: fixed;
+    top: 0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.intro-text{
+  font-family: 'Lobster', sans-serif;
+  color:rgb(255, 255, 255);
+  font-weight: bolder;
+  position: fixed;
+  top: 50%;
+  left:20%;
+
+}
+
+.text{
+    font-family: 'Heebo', sans-serif;
+    font-size: 2rem;
+    font-weight: bolder;
+}
+
+.slider{
+    background: rgb(172, 185, 197);
+    position: fixed;
+    top: 30;
+    left:0;
+    width: 100%;
+    height: 100%;
+    transform: translateY(100%);
+    
+}
+
+.hide{
+    background: transparent; 
+   
+    overflow: hidden;
+}
+
+.hide span{
+    transform: translateY(100%);
+    display: inline-block;
+}

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RegistrationService } from '../registration.service';
-import { User } from '../user';
+import { FacadeService } from '../services/facade.service';
+import { RegistrationService } from '../services/registration.service';
+import { User } from '../models/user';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -14,7 +15,7 @@ export class RegistrationComponent {
   hide = false;
   user = new User();
   msg = ""
-  constructor(private service: RegistrationService, private route: Router) { }
+  constructor(private service: FacadeService, private route: Router) { }
 
   getErrorMessage() {
     if (this.email.hasError('required')) {
@@ -25,17 +26,14 @@ export class RegistrationComponent {
   }
 
   signUpUser() {
-    this.service.signUpUser(this.user).subscribe(
-      response => {
-        console.log("succes")
-        this.route.navigate(['/pets']);
+    this.service.signUpUser(this.user);
+    this.route.navigate(['/']).then(() => {
+      window.location.reload();
+    });
+  }
 
-      },
-      error => {
-        console.log("exception occured")
-        this.msg = "Email or password is incorrect";
-      }
-    )
+  login() {
+    this.route.navigate([""]);
   }
 
 

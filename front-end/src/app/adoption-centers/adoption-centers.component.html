@@ -1,0 +1,115 @@
+
+<section id="hero" class="clearfix">
+    <div class="container d-flex h-100">
+        <div class="row justify-content-center align-self-center" data-aos="fade-up">
+            <div class="col-md-6 intro-info order-md-first order-last" data-aos="zoom-in" data-aos-delay="100">
+
+               
+            </div>
+        </div>
+    </div>
+</section>
+
+<h1 class="header-text">Meet &amp; Greet Adoptable Pets</h1>
+<h1 class="subtitle">Adoption Centers provide a clean,<br> quiet &  convenient place to meet adoptable pets.</h1>
+<h1 class="title">
+    <a class="btn btn-secondary btn_cta_link peacock-blue js-psci--lightbox" href="/adoption-centers#adopt" style="text-decoration: none"> Find a center near you </a><br><br>
+     <a *ngIf="!view" class="btn btn-secondary btn_cta_link peacock-blue js-psci--lightbox" href="/adoption-centers" style="text-decoration: none"> Return to all shelters </a>
+</h1>
+
+<div id="adopt">
+
+<div  *ngIf= "view && !currentCenter" class="container is-fluid">
+        <div class="notification is-primary ">
+        <div class="all-text search">
+            <h1 class="text">Find adoptable pets near you </h1>
+           
+        <form class="form-inline">
+        <div class="form-group mx-sm-3 mb-2">
+            <label for="inputPassword2" class="sr-only"></label>
+              <input type="text" class="form-control mb-4" placeholder="Search" name="city" [(ngModel)]="query" id="listSearch">
+          </div>
+        
+        
+        </form>
+        </div>
+
+        </div>
+
+</div>
+<div  *ngIf= "!view" class="container is-fluid">
+        <div class="notification is-primary ">
+        <div class="all-text search">
+            <h1 class="text">Pets from {{currentCenter.name}} shelter</h1>
+        </div>
+         </div>
+
+</div>
+
+<div *ngIf= "view && !currentCenter">
+    <div class="card"  *ngFor="let center of centersList | searchFilter: query">
+        <h2 class="card-header">{{center.name}}</h2>
+        <div class="card-body">
+                <h3 class="card-title">We are a pet shelter located in <strong> {{center.city}} </strong></h3>
+                <p class="card-text">{{center.description}}</p>
+                <a  class="btn btn-secondary btn_cta_link peacock-blue js-psci--lightbox" (click)="viewPets(center)"  [routerLink]="['/adoption-centers', center.id]" >View pets</a>
+                <button mat-button *ngIf="loggedIn.value && user.role==='admin'" (click)="update(center)" >Update</button>
+                <div class="rating">
+                    <h3> Please rate us here: </h3>
+
+
+                            <div *ngFor="let rate of center.ratings">
+                                <div *ngIf="user.id == rate.user.id">
+                                    <ngb-rating [max]="5" [(rate)]="rate.rate" [readonly]="false" (rateChange)="onRateChange(center, $event)" ></ngb-rating>
+                                </div>
+                            </div>
+
+                            <div *ngIf="!centerRated(center)">
+                                <ngb-rating [max]="5" [(rate)]="currentRate" [readonly]="false" (rateChange)="onRateChange(center, $event)" ></ngb-rating>
+                            </div>
+
+                </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div *ngIf="currentCenter && view && user.role==='admin'">
+ <form novalidate>
+                        <div class="tile center">
+                            <div class="tile is-parent">
+                                <article class="tile is-child notification is-success is-vertical">
+                                         <h1 class="text">Update this shelter </h1>
+                                        <label class="text-card" for="name">Center name:</label>
+                                        <input class="form-control" type="text" name="name" id="name"
+                                            [(ngModel)]="currentCenter.name"><br>
+                                        <label  class="text-card" for="name">City:</label>
+                                        <input class="form-control" type="text" name="city" id="city"
+                                            [(ngModel)]="currentCenter.city"><br>
+                                        <label  class="text-card" for="name">Description:</label>
+                                        <textarea class="form-control" type="text" name="description"
+                                           id="des" [(ngModel)]="currentCenter.description"></textarea><br>
+                                       
+
+                                        <a type="submit" (click)=updateCenter(currentCenter)>
+                                            <div class="field is-grouped">
+                                                <p class="control">
+                                                    <button class="button is-link">
+                                                        Save changes
+                                                    </button>
+                                                </p>
+                                            </div>
+                                        </a>
+                                 
+                                </article>
+                            </div>
+                        </div>
+                    </form>
+</div>
+
+<router-outlet></router-outlet>
+
+
+ 

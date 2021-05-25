@@ -1,24 +1,15 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatDialogModule } from '@angular/material/dialog';
-
+import { Component, OnInit } from '@angular/core';
+import gsap from 'gsap/all';
 import * as _ from 'lodash';
-import { RegistrationService } from '../registration.service';
-import { User } from '../user';
-export class Pet {
-  constructor(
-    public id: number,
-    public type: string,
-    public name: string,
-    public age: number,
-    public vaccinated: boolean,
-    public breed: string,
-    public adopted: boolean
-  ) {
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Center } from '../models/adoptionCenters';
+import { FacadeService } from '../services/facade.service';
+import { Pet } from '../models/pet';
+import { PetService } from '../services/pet.service';
+import { RegistrationService } from '../services/registration.service';
 
-  }
-}
+
 
 @Component({
   selector: 'app-pet-list',
@@ -29,18 +20,22 @@ export class Pet {
 
 export class PetListComponent implements OnInit {
 
-
   pets: Pet[];
   currentPet: Pet;
-
-  user = new User();
+  asyncPets$: Observable<Pet[]>;
+  loggedIn = new BehaviorSubject<boolean>(this.facadeService.isLoggedIn);
+  user = JSON.parse(localStorage.getItem('user'));
+  adoptedPets = this.user.pets;
   readonly APIUrl = "http://localhost:9191/pets";
-  constructor(private httpClient: HttpClient, private _service: RegistrationService) { }
+
+  constructor(private httpClient: HttpClient, private facadeService: FacadeService) {
+
+  }
 
   getPets() {
-    return this.httpClient.get<any>(this.APIUrl).subscribe(
-      response => {
-        console.log(response);
+
+    return this.facadeService.getPets().subscribe(
+      (response: Pet[]) => {
         this.pets = response;
       }
     )
@@ -52,7 +47,7 @@ export class PetListComponent implements OnInit {
       return this.getPets();
     }
 
-    return this.httpClient.get<any>(this.APIUrl + "?type=" + type + '').subscribe(
+    return this.facadeService.getByType(type).subscribe(
       response => {
         this.pets = response;
       }
@@ -61,7 +56,7 @@ export class PetListComponent implements OnInit {
 
   deletePet(val: any) {
 
-    return this.httpClient.delete(this.APIUrl + "/" + val).subscribe(
+    return this.facadeService.deletePet(val).subscribe(
       response => {
         this.getPets();
       }
@@ -69,15 +64,12 @@ export class PetListComponent implements OnInit {
 
   }
 
-
-  selectPet(pet) {
+  selectPet(pet: Pet) {
     this.currentPet = _.cloneDeep(pet);
   }
 
-  updatePet(pet) {
-
-    console.log("ddsdaf", pet);
-    return this.httpClient.put(this.APIUrl, pet).subscribe(
+  updatePet(pet: Pet) {
+    return this.facadeService.updatePet(pet).subscribe(
       response => {
         console.log(response);
         this.currentPet = null;
@@ -86,11 +78,30 @@ export class PetListComponent implements OnInit {
     )
   }
 
-  ngOnInit(): void {
-    this.getPets();
-    this.user = this._service.returnUser();
+  adoptPet(pet: Pet) {
+
+    if (confirm("Are you sure you wan to adopt " + pet.name + "?")) {
+      console.log("Am ajuns aici" + pet);
+      this.facadeService.adoptPet(pet, this.user.id).subscribe(
+        response => {
+          console.log(response);
+          this.currentPet = null;
+          this.getPets();
+        }
+      );
+    }
   }
 
+  animation() {
+    const tl = gsap.timeline({ defaults: { ease: "power1.out" } });
+    tl.fromTo('.title', { opacity: 0 }, { opacity: 1, duration: 1 });
+  }
+
+  ngOnInit(): void {
+    this.getPets();
+    this.asyncPets$ = this.facadeService.getPets();
+    this.animation();
+  }
 
 }
 

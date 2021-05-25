@@ -1,0 +1,51 @@
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+<section>
+
+<div class="hero">
+
+    <img src="assets/images/nor.jfif">
+    <div class="headline"> 
+    <h1 class="user-title" >Your profile</h1>
+
+
+                <div *ngIf="loggedIn.value">
+                    <p>Name: {{user.firstName}} {{user.lastName}}</p>
+
+                    <button mat-button  (click)="viewPets()"> {{pets? 'Hide pets' : 'View your pets'}}</button>
+                     <button mat-button  (click)="seeRatings()" > See ratings </button>
+                </div>
+
+            
+ <div class="container " *ngIf="pets">
+  <owl-carousel-o [options]="customOptions" [carouselClasses]="['owl-theme', 'row', 'sliding']">
+
+    <ng-container *ngFor="let pet of pets"> 
+      <ng-template carouselSlide [id]="pet.id">
+      <div class="slide">
+          
+                        <img src="{{pet.image}}" class="img img-responsive" />
+
+                        <div class="profile-content">
+                            <div class="card-body"  style="color:black">
+                                <h4 class=" card-title">Name: {{pet.name}}</h4>
+                                <h4 class=" card-title">Breed: {{pet.breed}}</h4>
+                                <h4 class=" card-title">Age: {{pet.age}} </h4>
+                                <h4 class=" card-title"> {{pet.vaccinated ? 'It is vaccinated' : 'It is not vaccinates' }}</h4>
+                                
+                
+                                </div>
+                        </div>
+                    
+      </div>
+      </ng-template>
+    </ng-container>
+
+  </owl-carousel-o>
+</div>
+
+    </div>
+</div>
+</section>
+<div class="sliderr"></div>
